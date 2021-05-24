@@ -1,0 +1,59 @@
+分支相关
+
+删除本地分支： git branch -d  xxxx
+
+删除远程分支:    git push origin   --delete  xxxx
+
+查看本地和远程所有分支： git branch  -a
+
+查看当前分支：  git branch -v
+
+查看远程分支： git branch -r 
+
+创建分支： git branch xxxx
+
+创建并切换分支：  git checkout  -b   xxx
+
+创建远端分支： 当本地存在分支branch-1.0.0 ，但是远端没有此分支，则可以使用：git push --set-upstream origin branch-1.0.0 ，这样远端会创建一个和本地同名的分支，并建立关联连。
+
+注：如果远端存在分支branch-1.0.0但是本地不存在，则可以使用：git checkout --track origin/branch-1.0.0 ，这样本地会新建一个和远端同名的分支，并建立关联。
+
+注：git push -u origin master   ===     git push origin test +  git branch --set-upstream-to=origin/master master
+
+分支合并
+
+假设将test分支合并到master分支。
+
+查看当前git 状态：  git status
+
+切换到master分支：  git checkout master
+
+多人协作需要拉取代码： git pull  或  origin master
+
+合并test分支到master： git merge test
+
+
+远程仓库
+
+本地仓库init之后，并且已经执行添加到暂存区，并提交，此时使用  git push  会提示没有和远程库建立关联。此时：
+
+添加远程库： git remote add  origin   xxxxx.git     (origin是远程库默认名称)  (关联一个远程库,并且必须指定一个名称，origin只是默认习惯而已)
+
+关联远程库之后提交：git push -u origin master    (指定远程仓库名origin和分支名master    -u默认   以后可以直接push)
+
+注：直接git push -u origin master  会报错，因为本地可能没有远端文件，解决办法：git pull --rebase origin master。此时本地就会存在远端的文件，这样再进行push就可以了。
+
+查看远程库信息： git remote -v
+
+删除远程库： git  remote  rm  origin  （origin也可以是其他名字）
+
+
+注：git push  是 git push origin master   的一种简写，当只关联一个远程，一个分支时，这两个没有区别。当关联多个的时候，git push  会报错，此时 git push  origin  master  会指定 push到  origin 仓库的 master 分支。
+
+注：git push -u和git branch --set-upstream-to指令之间的区别。举个例子：我要把本地分支mybranch1与远程仓库origin里的分支mybranch1建立关联。（如果使用下列途径1的话，首先，你要切换到mybranch1分支上（git checkout mybranch1））两个途径：1. git push -u origin mybranch1 2. git branch --set-upstream-to=origin/mybranch1 mybranch1这两种方式都可以达到目的。但是1方法更通用，因为你的远程库有可能并没有mybranch1分支，这种情况下你用2方法就不可行，连目标分支都不存在，怎么进行关联呢？所以可以总结一下：git push -u origin mybranch1 相当于 git push origin mybranch1 + git branch --set-upstream-to=origin/mybranch1 mybranch1
+
+作者：wll_24
+链接：https://juejin.cn/post/6844904005773213704
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
