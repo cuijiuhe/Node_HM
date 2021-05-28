@@ -133,3 +133,32 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false}))
 ```
 
+### express模版引擎
+
+安装：
+
+```shell
+npm install --save art-template
+npm install --save express-art-template
+```
+
+配置：
+
+```javascript
+//第一个参数用来配置视图的后缀名，这里是html，则你存储在views目录中的模版文件必须是x x x.html
+app.engine('html', require('express-art-template'));
+```
+
+使用：
+
+```javascript
+app.get('/', function (req, res) {
+  //express默认会去项目中 views 目录去找index.html
+  res.render('index.html', {
+    title: 'hello template'
+  })
+})
+```
+
+
+
