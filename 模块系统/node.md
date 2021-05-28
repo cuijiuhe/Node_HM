@@ -83,3 +83,53 @@ exports === module.exports
 
 在Node中，有很多 在这里我们学习```express```
 
+## 修改完代码自动重启
+
+使用第三方工具 `nodemon` 是一个基于Node开发的命令行工具
+
+```javascript
+npm install --global nodemon
+```
+
+安装完毕后使用
+
+```shell
+# 使用 nodemon
+nodemon app.js
+```
+
+只要是 `--global` 这个参数执行部分目录
+
+### Hello World
+
+```javascript
+const express = require('express');
+
+const app = express();
+
+app.get('/', function (req, res) {
+  res.send('Hello Worlds')
+})
+
+app.listen(3000, function () {
+  console.log('Express app is Running')
+})
+```
+
+## 在Express获取pos t请求踢数据
+
+使用中间件：
+
+```shell
+npm install --save body-parser
+```
+
+引入
+
+```javascript
+const bodyParser = require('body-parser');
+//只要经过配置，则req请求对象上会多一个body属性
+
+app.use(bodyParser.urlencoded({ extended: false}))
+```
+
